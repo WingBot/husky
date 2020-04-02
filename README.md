@@ -1,5 +1,4 @@
-husky
-=====
+# husky
 
 Common ROS packages for the Clearpath Husky, useable for both simulation and
 real robot operation.
@@ -40,3 +39,12 @@ Simulator ROS packages for the Clearpath Husky.
  - husky_gazebo : Gazebo plugin definitions and extensions to the robot URDF.
 
 For Husky instructions and tutorials, please see http://wiki.ros.org/Robots/Husky
+
+# husky_hk_sprayer
+
+Simulator ROS config for Clearpath Husky with sprayer.
+
+```sh
+roslaunch husky_gazebo husky_hk_playpen.launch
+```
+
