@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.4.2-27-gc3b3358  Build Version: 1.4.6891.25992
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="sprayer">
+<!--add sprayer base link to Huksy top plate link-->
+  <link
+    name="sprayer_base_link">
+    <inertial>
+      <origin
+        xyz="-6.0061E-35 2.3709E-19 0.06355"
+        rpy="0 0 0" />
+      <mass
+        value="2.4305" />
+      <inertia
+        ixx="0.0080414"
+        ixy="-8.9241E-35"
+        ixz="-2.9632E-35"
+        iyy="0.0080414"
+        iyz="4.499E-19"
+        izz="0.0091706" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://husky_description/meshes/sprayer_meshes/sprayer_base_link.STL" />
+      </geometry>
+      <material
+        name="youBot/DarkGrey">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://husky_description/meshes/sprayer_meshes/sprayer_base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="sprayer_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 -1.57" />
+    <parent
+      link="top_plate_link" />
+    <child
+      link="sprayer_base_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+    <safety_controller
+      k_velocity="0" />
+  </joint>
+	<gazebo reference="sprayer_base_link">
+		<material>Gazebo/DarkGrey</material>
+		<turnGravityOff>false</turnGravityOff>	
+	</gazebo>
+<!--add sprayer span link to sprayer base link-->
+  <link
+    name="pan_link">
+    <inertial>
+      <origin
+        xyz="2.197E-12 1.154E-11 0.03937"
+        rpy="0 0 0" />
+      <mass
+        value="6.0325" />
+      <inertia
+        ixx="0.039128"
+        ixy="8.6579E-09"
+        ixz="-1.0599E-12"
+        iyy="0.037791"
+        iyz="-3.7487E-12"
+        izz="0.025512" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://husky_description/meshes/sprayer_meshes/pan_link.STL" />
+      </geometry>
+      <material
+        name="youBot/LightGrey">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://husky_description/meshes/sprayer_meshes/pan_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="pan_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0.16"
+      rpy="0 0 0" />
+    <parent
+      link="sprayer_base_link" />
+    <child
+      link="pan_link" />
+    <axis
+      xyz="0 0 1" />
+    <!--<calibration rising="${arm_5_ref}" falling="${arm_5_ref}"/>-->
+	<dynamics damping="1" friction="1" />
+	<limit effort="${1.0}" velocity="${M_PI / 2.0}" lower="-1.0" upper="1.0" />
+  </joint>
+
+	<gazebo reference="pan_link">
+		<material>Gazebo/Grey</material>
+		<turnGravityOff>false</turnGravityOff>	
+	</gazebo>
+    <transmission name="pan_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="pan_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="pan_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+
+<!--add sprayer tlit link to sprayer span link-->
+  <link
+    name="tlit_link">
+    <inertial>
+      <origin
+        xyz="-1.1274E-05 0.047928 0.11037"
+        rpy="0 0 0" />
+      <mass
+        value="6.9537" />
+      <inertia
+        ixx="0.40517"
+        ixy="7.4751E-05"
+        ixz="5.0456E-07"
+        iyy="0.079765"
+        iyz="0.0090127"
+        izz="0.39191" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0.08"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://husky_description/meshes/sprayer_meshes/tlit_link.STL" />
+      </geometry>
+      <material
+        name="youBot/Green">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://husky_description/meshes/sprayer_meshes/tlit_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="tlit_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0.13"
+      rpy="0 0 0" />
+    <parent
+      link="pan_link" />
+    <child
+      link="tlit_link" />
+    <axis
+      xyz="1 0 0" />
+     <!--<calibration rising="${arm_5_ref}" falling="${arm_5_ref}"/>-->
+	<dynamics damping="1" friction="1" />
+	<limit effort="${1.0}" velocity="${M_PI / 2.0}" lower="-0.4" upper="0.4" />
+  </joint>
+	<gazebo reference="tlit_link">
+		<material>Gazebo/Green</material>
+		<turnGravityOff>false</turnGravityOff>	
+	</gazebo>
+    <transmission name="tlit_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="tlit_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="tlit_joint">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+
+</robot>

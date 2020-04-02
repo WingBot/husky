@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro/#interface">
+
+	<!-- common properties -->
+	<xacro:property name="M_PI" value="3.1415926535897931" />
+	<xacro:property name="threshold" value="0.01" />
+
+	<!-- sprayer limits positions (deg) -->
+	<xacro:property name="pan_joint_upper_limit" value="${M_PI * 90 / 180}" />
+	<xacro:property name="pan_joint_lower_limit" value="${M_PI * (-90) / 180}" />
+	<xacro:property name="tlit_joint_upper_limit" value="${M_PI * (25) / 180}" />
+	<xacro:property name="tlit_joint_lower_limit" value="${M_PI * (-25) / 180}" />
+
+
+	<xacro:property name="pan_joint_upper_limit_soft" value="${pan_joint_upper_limit - threshold}" />
+	<xacro:property name="pan_joint_lower_limit_soft" value="${pan_joint_lower_limit + threshold}" />
+	<xacro:property name="tlit_joint_upper_limit_soft" value="${tlit_joint_upper_limit - threshold}" />
+	<xacro:property name="tlit_joint_lower_limit_soft" value="${tlit_joint_lower_limit + threshold}" />
+
+</xacro:macro>
+
+
+</robot>
